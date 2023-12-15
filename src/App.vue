@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/Header/Header.vue";
 </script>
 
 <template>
-  <HelloWorld />
+  <Header />
+  <router-view />
 </template>
 
 <style scoped>
