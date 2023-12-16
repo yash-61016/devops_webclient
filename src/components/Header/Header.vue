@@ -25,7 +25,7 @@ onMounted(async () => {
 <template>
     <div class="navbar bg-base-100">
         <div class="navbar-start">
-            <a class="btn btn-ghost text-xl">appfel</a>
+            <a class="btn btn-ghost text-xl">pine.apple</a>
         </div>
         <div class="navbar-center">
             <div role="tablist" class="tabs tabs-boxed">
@@ -36,7 +36,7 @@ onMounted(async () => {
                 </a>
             </div>
         </div>
-        <div class="navbar-end mr-5">
+        <div class="navbar-end">
             <button class="btn btn-sm btn-circle mr-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -91,7 +91,7 @@ onMounted(async () => {
 .tabs-boxed {
     display: flex;
     flex-direction: row;
-    width: 70vw;
+    width: 60vw;
     border-radius: 25px;
 }
 

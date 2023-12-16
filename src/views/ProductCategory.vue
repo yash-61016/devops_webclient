@@ -6,58 +6,82 @@ import { FeaturedProductTemplateModel } from '../models/Product/FeaturedProductT
 import { ImageModel } from '../models/Product/ImageModel';
 import FeaturedProduct from '../components/Product/FeaturedProduct.vue';
 import Catalog from '../components/Product/Catalog.vue';
+import { PropertyModel } from '../models/Product/PropertyModel';
 
 // const props = defineProps(['category']);
 
 // const category = ref<ProductCategoryModel>(props.category);
 
 const newFeatureImage: ImageModel = {
-    imageUrl: '/workspaces/devops_webclient/src/assets/newFeature.jpg',
+    imageUrl: 'newFeature.png',
     altText: null
 };
 
 const bannerImages: ImageModel[] = [
     {
-        imageUrl: '/workspaces/devops_webclient/src/assets/banner1.jpg',
+        imageUrl: 'banner1.png',
         altText: null
     },
     {
-        imageUrl: '/workspaces/devops_webclient/src/assets/banner2.jpg',
+        imageUrl: 'banner2.png',
         altText: null
     },
     {
-        imageUrl: '/workspaces/devops_webclient/src/assets/banner3.jpg',
+        imageUrl: 'banner3.png',
         altText: null
     }
 ];
 
 const featuredImages: ImageModel[] = [
     {
-        imageUrl: '/workspaces/devops_webclient/src/assets/featured1.jpg',
+        imageUrl: 'featured1.png',
         altText: null
     },
     {
-        imageUrl: '/workspaces/devops_webclient/src/assets/featured2.jpg',
+        imageUrl: 'featured2.png',
         altText: null
     },
     {
-        imageUrl: '/workspaces/devops_webclient/src/assets/featured3.jpg',
+        imageUrl: 'featured3.png',
         altText: null
+    }
+];
+
+const properties: PropertyModel[] = [
+    {
+        key: 'size',
+        type: 'Size',
+        value: '44mm case size',
+    },
+    {
+        key: 'display',
+        type: 'Display',
+        value: 'Always-On Retina',
+    },
+    {
+        key: 'processor',
+        type: 'Processor',
+        value: 'S9 SiP',
     }
 ];
 
 const featuredProduct: FeaturedProductTemplateModel = {
     id: 2,
-    name: 'Watch Ultra 2',
+    name: 'Apple Watch Ultra',
     briefDescription: 'The most rugged and capable Apple Watch pushes the limits again. Featuring the all-new S9 SiP.',
+    startingPrice: 799.00,
     title: 'Next-level adventure.',
     description: 'A magical new way to use your watch without touching the screen. The brightest Apple display ever. And now you can choose a case and strap combination that is carbon neutral.',
     newFeatureImage: newFeatureImage,
-    newFeatureDescription: ' The lightweight titanium case is rugged and corrosion resistant, and its raised to protect the sapphire crystal from edge impacts.',
+    newFeatureDescription: ' The lightweight titanium case is rugged and corrosion resistant.',
+    newFeatureImage2: newFeatureImage,
+    newFeatureDescription2: ' The customizable Action button gives you quick, physical control over a variety of functions. ',
     bannerImages: bannerImages,
+    bannerTitle: 'New Guts. More Glory.',
     featuredImages: featuredImages,
     productCategoryId: 1,
-    products: []
+    products: [],
+    properties: properties
 };
 
 const category: ProductCategoryModel = {
