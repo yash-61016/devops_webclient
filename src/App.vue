@@ -4,9 +4,9 @@ import Header from "./components/Header/Header.vue";
 
 <template>
   <div class="flex justify-center">
-    <div class="pr-5" style="max-width: 100rem;">
+    <div class="pr-5" style="max-width: 98rem !important;">
       <Header />
-      <router-view class="pl-5" />
+      <router-view />
     </div>
   </div>
 </template>

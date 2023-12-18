@@ -1,15 +1,15 @@
-import { ImageModel } from "./ImageModel";
-import { ProductModel } from "./ProductModel";
+import { ImageDTO } from "./ImageDTO";
+import { ProductDTO } from "./ProductDTO";
 
-export interface ProductTemplateModel {
+export interface ProductTemplateDTO {
     id: number;
     name: string;
     brand: string;
     displayPrice: number;
     displayDiscountedPrice: number | null;
     description: string;
-    defaultImages: ImageModel[];
+    defaultImages: ImageDTO[];
     productCategoryId: number;
-    products: ProductModel[];
+    products: ProductDTO[];
     badges: string[];
 }
