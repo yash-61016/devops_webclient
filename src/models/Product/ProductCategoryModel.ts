@@ -1,17 +1,11 @@
 import { FeaturedProductTemplateModel } from "./FeaturedProductTemplateModel";
-import { ProductModel } from "./ProductModel";
+import { ProductTemplateModel } from "./ProductTemplateModel";
 
 export interface ProductCategoryModel {
     id: number;
     name: string;
     isSelected: boolean;
     preferenceIndex: number;
-    products: ProductModel[];
-    featuredProduct: FeaturedProductTemplateModel;
+    productTemplates: ProductTemplateModel[] | null;
+    featuredProduct: FeaturedProductTemplateModel | null;
 }
-
-
-
-
-
-

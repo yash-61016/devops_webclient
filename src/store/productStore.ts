@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { productService } from '../api/productService';
-import { ProductCategoryDTO } from '../dto/ProductCategoryDTO';
+import { ProductCategoryDTO } from '../dto/Product/ProductCategoryDTO';
 import { ProductCategoryModel } from '../models/Product/ProductCategoryModel';
 
 export const useProductStore = defineStore({
@@ -19,10 +19,22 @@ export const useProductStore = defineStore({
                 this.categories = categoriesDTO.map((dto) => ({
                     id: dto.id,
                     name: dto.name,
-                    description: dto.description,
                     isSelected: false,
                     preferenceIndex: dto.preferenceIndex,
+                    productTemplates: null,
+                    featuredProduct: null,
                 }));
+            } catch (error: unknown) {
+                this.productError = true;
+                this.productErrorMessage = (error as Error).message;
+            }
+        },
+        async fetchProducts() {
+            try {
+                const productsDTO = await productService.getProducts();
+                this.categories.forEach((category) => {
+                    category.productTemplates = productsDTO.filter((product) => product.productCategoryId === category.id);
+                });
             } catch (error: unknown) {
                 this.productError = true;
                 this.productErrorMessage = (error as Error).message;

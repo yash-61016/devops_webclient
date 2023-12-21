@@ -1,12 +1,12 @@
-import { ImageModel } from "./ImageModel.ts";
-import { PropertyModel } from "./PropertyModel.ts";
+import { ImageModel } from "./ImageModel";
+import { PropertyModel } from "./PropertyModel";
 
 export interface ProductModel {
     id: number;
     name: string;
     price: number;
-    discount: number;
-    discountType: string;
+    discounted_price: number | null;
+    color: string | null;
     images: ImageModel;
     properties: PropertyModel[];
     productTemplateId: number;

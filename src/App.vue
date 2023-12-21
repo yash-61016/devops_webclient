@@ -3,8 +3,12 @@ import Header from "./components/Header/Header.vue";
 </script>
 
 <template>
-  <Header />
-  <router-view />
+  <div class="flex justify-center">
+    <div class="pr-5" style="max-width: 98rem !important;">
+      <Header />
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <style scoped>
