@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useProductStore } from "../../store/productStore.ts";
+import ProfileButton from "./ProfileButton.vue";
 
 const productStore = useProductStore();
-
+const appName = import.meta.env.VITE_APP_NAME as string;
 const activeTab = ref<number>(0);
 
 const toggleTab = (tabNumber: number) => {
@@ -25,7 +26,7 @@ onMounted(async () => {
 <template>
     <div class="navbar bg-base-100">
         <div class="navbar-start">
-            <a class="btn btn-ghost text-xl">pine.apple</a>
+            <a class="btn btn-ghost text-xl">{{ appName }}</a>
         </div>
         <div class="navbar-center">
             <div role="tablist" class="tabs tabs-boxed">
@@ -37,7 +38,7 @@ onMounted(async () => {
             </div>
         </div>
         <div class="navbar-end">
-            <button class="btn btn-sm btn-circle mr-1">
+            <button class="btn btn-sm btn-circle mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -66,22 +67,7 @@ onMounted(async () => {
                 </div>
             </div>
             <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                    <div class="w-10 rounded-full">
-                        <img alt="Tailwind CSS Navbar component"
-                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                    </div>
-                </div>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li>
-                        <a class="justify-between">
-                            Profile
-                            <span class="badge">New</span>
-                        </a>
-                    </li>
-                    <li><a>Settings</a></li>
-                    <li><a>Logout</a></li>
-                </ul>
+                <ProfileButton />
             </div>
         </div>
     </div>
