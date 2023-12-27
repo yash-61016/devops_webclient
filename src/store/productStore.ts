@@ -29,17 +29,6 @@ export const useProductStore = defineStore({
                 this.productErrorMessage = (error as Error).message;
             }
         },
-        async fetchProducts() {
-            try {
-                const productsDTO = await productService.getProducts();
-                this.categories.forEach((category) => {
-                    category.productTemplates = productsDTO.filter((product) => product.productCategoryId === category.id);
-                });
-            } catch (error: unknown) {
-                this.productError = true;
-                this.productErrorMessage = (error as Error).message;
-            }
-        },
         async setActiveCategory(category: ProductCategoryModel) {
             this.activeCategory = category;
         },

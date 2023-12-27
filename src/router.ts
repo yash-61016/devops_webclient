@@ -5,7 +5,6 @@ import ProfileVue from './views/Profile.vue';
 import { authGuard } from '@auth0/auth0-vue';
 
 const Home = ProductCategoryVue;
-const About = { template: '<div>About</div>' }
 
 const routes = [
   { path: '/', component: Home },
