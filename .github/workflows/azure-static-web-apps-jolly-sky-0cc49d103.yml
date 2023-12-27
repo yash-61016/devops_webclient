@@ -21,10 +21,12 @@ jobs:
           lfs: false
       - name: Set Environment Variables
         run: |
-          echo "VITE_AUTH0_DOMAIN=${{ secrets.VITE_AUTH0_DOMAIN }}" >> $GITHUB_ENV
-          echo "VITE_AUTH0_CLIENT_ID=${{ secrets.VITE_AUTH0_CLIENT_ID }}" >> $GITHUB_ENV
-          echo "VITE_AUTH0_CALLBACK_URL=${{ secrets.VITE_AUTH0_CALLBACK_URL }}" >> $GITHUB_ENV
-          echo "VITE_APP_NAME=${{ secrets.VITE_APP_NAME }}" >> $GITHUB_ENV
+          touch .env
+          echo "VITE_AUTH0_DOMAIN=${{ secrets.VITE_AUTH0_DOMAIN }}" >> .env
+          echo "VITE_AUTH0_CLIENT_ID=${{ secrets.VITE_AUTH0_CLIENT_ID }}" >> .env
+          echo "VITE_AUTH0_CALLBACK_URL=${{ secrets.VITE_AUTH0_CALLBACK_URL }}" >> .env
+          echo "VITE_APP_NAME=${{ secrets.VITE_APP_NAME }}" >> .env
+          cat .env
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
