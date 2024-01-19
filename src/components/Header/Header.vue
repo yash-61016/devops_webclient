@@ -1,15 +1,31 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useProductStore } from "../../store/productStore.ts";
+import { useCartStore } from "../../store/cartStore.ts";
 import ProfileButton from "./ProfileButton.vue";
+import { useRouter} from "vue-router";
+import { useAuth0 } from "@auth0/auth0-vue";
+import { storeToRefs } from "pinia";
 
+const { user } = useAuth0();
+
+const router = useRouter();
 const productStore = useProductStore();
+const cartStore = useCartStore();
 const appName = import.meta.env.VITE_APP_NAME as string;
 const activeTab = ref<number>(0);
-
+const { fetchCart } = cartStore;
+const { cart } = storeToRefs(cartStore);
 const toggleTab = (tabNumber: number) => {
     activeTab.value = tabNumber === activeTab.value ? 0 : tabNumber;
 };
+
+//watch isAuthenticated
+watch(user, (newValue) => {
+    if (newValue) {
+        fetchCart();
+    }
+});
 
 onMounted(async () => {
     try {
@@ -17,6 +33,9 @@ onMounted(async () => {
         // Set the initial active tab based on the first category
         if (productStore.getCategories.length > 0) {
             activeTab.value = productStore.getCategories[0].id;
+            productStore.fetchCategoryCatalogue(activeTab.value).then(() => {
+                router.push({ name: 'product-category', params: { id: 1 } });
+            });
         }
     } catch (error) {
         console.error("Error fetching categories:", error);
@@ -53,17 +72,30 @@ onMounted(async () => {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span class="badge badge-sm indicator-item">8</span>
+                        <template v-if="cart">
+                            <span class="badge badge-sm indicator-item">{{ cart.cartProducts.lenght }}</span>
+                        </template>
                     </div>
                 </div>
                 <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                    <div class="card-body">
-                        <span class="font-bold text-lg">8 Items</span>
-                        <span class="text-info">Subtotal: $999</span>
-                        <div class="card-actions">
-                            <button class="btn btn-primary btn-block">View cart</button>
+                    <template v-if="cart">
+                        <div class="card-body">
+                            <span class="font-bold text-lg">{{ cart.cartProducts.length }} Items</span>
+                            <span class="text-info">Subtotal: ${{ cart.subtotal }}</span>
+                            <div class="card-actions">
+                                <button class="btn btn-primary btn-block">View cart</button>
+                            </div>
                         </div>
-                    </div>
+                        </template>
+                        <template v-else>
+                            <div class="card-body">
+                                <span class="font-bold text-lg">0 Items</span>
+                                <span class="text-info">Subtotal: $0.00</span>
+                                <div class="card-actions">
+                                    <button class="btn btn-primary btn-block">View cart</button>
+                                </div>
+                            </div>
+                        </template>
                 </div>
             </div>
             <div class="dropdown dropdown-end">
