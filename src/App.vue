@@ -1,5 +1,16 @@
 <script setup lang="ts">
 import Header from "./components/Header/Header.vue";
+import { useAuth0 } from '@auth0/auth0-vue';
+
+const { getAccessTokenSilently } = useAuth0();
+
+const getAccessToken = async () => {
+  const token = await getAccessTokenSilently();
+  window.localStorage.setItem('token', token);
+  console.log(token);
+};
+
+getAccessToken();
 </script>
 
 <template>

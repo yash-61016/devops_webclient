@@ -1,11 +1,14 @@
 import axios from "axios";
+import { authHeader } from "../helpers/auth-headers";
 const META_ENV = import.meta.env;
 const { VITE_MS_BFF_URL } = META_ENV;
 export const cartService = {
   async getCart(userId: number): Promise<CartDto> {
     try {
+      const headers = authHeader();
       const response = await axios.get(
-        `${VITE_MS_BFF_URL}/api/cart/user-${userId}`
+        `${VITE_MS_BFF_URL}/api/cart/user-${userId}`,
+        { headers }
       );
       const data = response.data as APIResponse;
       if (response.status !== 200 || !data.isSuccess) {
@@ -18,9 +21,14 @@ export const cartService = {
   },
   async createCart(cartDto: CartCreateDto): Promise<CartDto> {
     try {
-      const response = await axios.post(`${VITE_MS_BFF_URL}/api/cart/create`, {
-        cartDto,
-      });
+      const headers = authHeader();
+      const response = await axios.post(
+        `${VITE_MS_BFF_URL}/api/cart/create`,
+        {
+          cartDto,
+        },
+        { headers }
+      );
       const data = response.data as APIResponse;
       if (response.status !== 201 || !data.isSuccess) {
         throw new Error(data.errorMessages.join(", "));
@@ -31,18 +39,22 @@ export const cartService = {
     }
   },
   async addToCart(productId: number): Promise<void> {
-    await axios.post(`${process.env.VITE_MS_BFF_URL}/cart`, {
-      productId,
-    });
+    const headers = authHeader();
+    await axios.post(
+      `${process.env.VITE_MS_BFF_URL}/cart`,
+      {
+        productId,
+      },
+      { headers }
+    );
   },
   async removeFromCart(productId: number): Promise<void> {
+    const headers = authHeader();
     await axios.delete(`${process.env.VITE_MS_BFF_URL}/cart`, {
       data: {
         productId,
       },
+      headers,
     });
-  },
-  async clearCart(): Promise<void> {
-    await axios.delete(`${process.env.VITE_MS_BFF_URL}/cart`);
   },
 };

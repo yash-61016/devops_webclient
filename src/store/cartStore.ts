@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { cartService } from "../api/cartService";
+import { cartService } from "../services/cartService";
 import { cp } from "fs";
 
 export const useCartStore = defineStore({

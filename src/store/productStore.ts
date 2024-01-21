@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { productService } from "../api/productService";
+import { productService } from "../services/productService";
 import { ProductCategoryDTO } from "../dto/Product/ProductCategoryDTO";
 import { ProductCategoryModel } from "../models/Product/ProductCategoryModel";
 
