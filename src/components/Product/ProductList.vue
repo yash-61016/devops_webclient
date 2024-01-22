@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, defineProps } from 'vue';
-import { ProductModel } from '../../models/Product/ProductModel';
 import { ProductTemplateModel } from '../../models/Product/ProductTemplateModel';
 
 const props = defineProps(['productTemplates']);
@@ -16,7 +15,8 @@ const openModal = (index: number) => {
     selectedProduct.value = productTemplates.value[index];
     console.log(selectedProduct.value);
     const modal = document.getElementById('my_modal_2');
-    modal?.showModal();
+    const modalElement = modal as HTMLDialogElement;
+    modalElement.showModal();
 }
 
 </script>
@@ -84,7 +84,7 @@ const openModal = (index: number) => {
                     <h2 class="card-title">{{ selectedProduct?.name }}</h2>
                     <div class="flex items-center gap-1 mt-2">
                         <template v-for="product in selectedProduct?.products" :key="product.id">
-                            <div class="badge badge-lg border-0" :style="{ backgroundColor: product.color }"></div>
+                            <div class="badge badge-lg border-0" :style="{ backgroundColor: product.color || '' }"></div>
                         </template>
                     </div>
                     <div class="flex flex-row justify-between items-center mt-6">

@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { useAuth0 } from "@auth0/auth0-vue";
 import { cartService } from "../services/cartService";
-import { cp } from "fs";
 
 export const useCartStore = defineStore({
   id: "cart",
@@ -53,6 +52,7 @@ export const useCartStore = defineStore({
             console.log(cart);
           })
           .catch((error) => {
+            console.log(error);
             const cartOverviewDto: CartOverviewCreateDto = {
               userId: this.user_id ?? 0,
               totalPrice: 0,
